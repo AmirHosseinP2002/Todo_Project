@@ -5,5 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    Hello
+    {% for todo in todos %}
+        <br>
+        {{ todo.title }}
+        {{ todo.author }}
+        {{ todo.datetime_created }}
+        <br>
+        <br>
+        <hr>
+    {% endfor %}
+
 {% endblock %}
