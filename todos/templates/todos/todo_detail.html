@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    Detail: {{ todo.title }}
+{% endblock %}
+
+{% block content %}
+    <h3>{{ todo.title }}</h3>
+    <p>{{ todo.description|linebreaks }}</p>
+    <p>{{ todo.author }}</p>
+    <p>{{ todo.datetime_created }}</p>
+{% endblock %}
