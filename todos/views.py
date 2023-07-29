@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse
 
 from .models import Todo
@@ -31,4 +31,19 @@ def todo_add_view(request):
         todo_form = TodoForm()
     return render(request, 'todos/todo_create.html', {
         'todo_form': todo_form,
+    })
+
+
+def todo_update_view(request, pk):
+    todo = get_object_or_404(Todo, pk=pk)
+    todo_form = TodoForm(instance=todo)
+    if request.method == 'POST':
+        todo_form = TodoForm(request.POST or None, instance=todo)
+        if todo_form.is_valid():
+            todo_form.save()
+            return redirect(reverse('todo_detail', args=[todo.id]))
+
+    return render(request, 'todos/todo_update.html', {
+        'todo_form': todo_form,
+        'todo': todo
     })
