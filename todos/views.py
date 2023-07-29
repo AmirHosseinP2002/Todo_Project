@@ -58,3 +58,15 @@ def todo_delete_view(request, pk):
     return render(request, 'todos/todo_delete.html', {
         'todo': todo,
     })
+
+
+def todo_update_checkbox(request, pk):
+    todo = get_object_or_404(Todo, pk=pk)
+    is_completed = request.POST.get('is_completed', False)
+    print(is_completed)
+    if is_completed == 'on':
+        is_completed = True
+
+    todo.is_completed = is_completed
+    todo.save()
+    return redirect('todos_list')
