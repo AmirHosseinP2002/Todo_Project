@@ -5,14 +5,27 @@
 {% endblock %}
 
 {% block content %}
-    {% for todo in todos %}
-        <br>
-        <a href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a>
-        {{ todo.author }}
-        {{ todo.datetime_created }}
-        <br>
-        <br>
-        <hr>
-    {% endfor %}
+    <!-- title row -->
+    <div class="row">
+        <div class="offset-md-2 col-lg-9">
+            <div class="page-header">
+                <h1>
+                    Todo List
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- todo list -->
+    <div class="row">
+        <div class="offset-md-2 col-lg-6">
+            <div class="list-group">
+                {% for todo in todos %}
+                    <div class="list-group-item {% if todo.is_completed %} todo-complete {% endif %}">
+                        <a class="text-decoration-none" href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
