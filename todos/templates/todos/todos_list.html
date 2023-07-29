@@ -47,14 +47,17 @@
                         <form class="update-form" method="POST" action="{% url 'todo_update_ckeckbox' todo.id %}">
                             {% csrf_token %}
                             <input type="checkbox" name="is_completed"
-                                    onchange="this.form.submit()"
+                                   onchange="this.form.submit()"
                                     {% if todo.is_completed %}
-                                    checked
+                                   checked
                                     {% endif %}
                                    class="todo-status-checkbox"
                                    title="{% if not todo.is_completed %} mark as done {% else %} mark undone {% endif %}">
                         </form>
                         <a class="text-decoration-none" href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a>
+                        <a href="{% url 'todo_delete' todo.id %}" title="Delete">
+                            <i class="fa-trash-alt fa-solid fa-trash-can"></i>
+                        </a>
                     </div>
                 {% endfor %}
             </div>
