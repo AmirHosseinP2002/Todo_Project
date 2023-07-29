@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .models import Todo
 from .forms import TodoForm
 
 
+@login_required
 def todos_list_view(request):
     todos = Todo.objects.filter(author=request.user).order_by('-datetime_created')
     return render(request, 'todos/todos_list.html', {
@@ -12,6 +14,7 @@ def todos_list_view(request):
     })
 
 
+@login_required
 def todo_detail_view(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     return render(request, 'todos/todo_detail.html', {
@@ -19,6 +22,7 @@ def todo_detail_view(request, pk):
     })
 
 
+@login_required
 def todo_add_view(request):
     if request.method == 'POST':
         todo_form = TodoForm(request.POST)
@@ -34,6 +38,7 @@ def todo_add_view(request):
     })
 
 
+@login_required
 def todo_update_view(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     todo_form = TodoForm(instance=todo)
@@ -49,6 +54,7 @@ def todo_update_view(request, pk):
     })
 
 
+@login_required
 def todo_delete_view(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == 'POST':
@@ -60,6 +66,7 @@ def todo_delete_view(request, pk):
     })
 
 
+@login_required
 def todo_update_checkbox(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     is_completed = request.POST.get('is_completed', False)
@@ -72,6 +79,7 @@ def todo_update_checkbox(request, pk):
     return redirect('todos_list')
 
 
+@login_required
 def todo_delete_icon(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     todo.delete()
