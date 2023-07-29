@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # local
     'todos.apps.TodosConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
