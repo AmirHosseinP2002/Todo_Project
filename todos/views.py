@@ -47,3 +47,14 @@ def todo_update_view(request, pk):
         'todo_form': todo_form,
         'todo': todo
     })
+
+
+def todo_delete_view(request, pk):
+    todo = get_object_or_404(Todo, pk=pk)
+    if request.method == 'POST':
+        todo.delete()
+        return redirect(reverse('todos_list'))
+
+    return render(request, 'todos/todo_delete.html', {
+        'todo': todo,
+    })
