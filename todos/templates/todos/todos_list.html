@@ -44,6 +44,16 @@
             <div class="list-group">
                 {% for todo in todos %}
                     <div class="list-group-item {% if todo.is_completed %} todo-complete {% endif %}">
+                        <form class="update-form" method="POST" action="{% url 'todo_update_ckeckbox' todo.id %}">
+                            {% csrf_token %}
+                            <input type="checkbox" name="is_completed"
+                                    onchange="this.form.submit()"
+                                    {% if todo.is_completed %}
+                                    checked
+                                    {% endif %}
+                                   class="todo-status-checkbox"
+                                   title="{% if not todo.is_completed %} mark as done {% else %} mark undone {% endif %}">
+                        </form>
                         <a class="text-decoration-none" href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a>
                     </div>
                 {% endfor %}
