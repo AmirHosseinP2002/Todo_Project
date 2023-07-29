@@ -70,3 +70,9 @@ def todo_update_checkbox(request, pk):
     todo.is_completed = is_completed
     todo.save()
     return redirect('todos_list')
+
+
+def todo_delete_icon(request, pk):
+    todo = get_object_or_404(Todo, pk=pk)
+    todo.delete()
+    return redirect('todos_list')

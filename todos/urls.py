@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/update/', views.todo_update_view, name='todo_update'),
     path('<int:pk>/checkbox/', views.todo_update_checkbox, name='todo_update_ckeckbox'),
     path('<int:pk>/delete/', views.todo_delete_view, name='todo_delete'),
+    path('<int:pk>/icon/', views.todo_delete_icon, name='todo_delete_icon'),
 ]
